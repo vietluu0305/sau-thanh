@@ -2,103 +2,80 @@ import React, { useRef, useEffect } from 'react';
 import { MapPin, Clock } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
 gsap.registerPlugin(ScrollTrigger);
-
-export const AtelierHeritage: React.FC = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) return;
-
-    const ctx = gsap.context(() => {
-      // Image: clip-path reveal from left
-      if (imageRef.current) {
-        gsap.set(imageRef.current, {
-          clipPath: 'inset(0 100% 0 0)',
-          willChange: 'clip-path',
-        });
-        gsap.to(imageRef.current, {
-          clipPath: 'inset(0 0% 0 0)',
-          duration: 1.25,
-          ease: 'power3.inOut',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none none',
-          },
-          onComplete: () => {
-            gsap.set(imageRef.current, { willChange: 'auto' });
-          },
-        });
-
-        // Subtle camera parallax
-        const img = imageRef.current.querySelector('img');
-        if (img) {
-          gsap.to(img, {
-            yPercent: -12,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: 1.2,
-            },
-          });
-        }
-      }
-
-      // Text elements stagger
-      if (textRef.current) {
-        const els = textRef.current.querySelectorAll('[data-reveal]');
-        gsap.set(els, { opacity: 0, y: 28, willChange: 'transform, opacity' });
-        gsap.to(els, {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: textRef.current,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-          onComplete: () => {
-            gsap.set(els, { willChange: 'auto' });
-          },
-        });
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  return (
-    <section
-      ref={sectionRef}
-      id="chuyen-tiem-moc"
-      className="w-full bg-ivory py-20 md:py-28 overflow-hidden"
-      aria-label="Chuyện tiệm mộc Sáu Thành"
-    >
+export const AtelierHeritage = () => {
+    const sectionRef = useRef(null);
+    const imageRef = useRef(null);
+    const textRef = useRef(null);
+    useEffect(() => {
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduced)
+            return;
+        const ctx = gsap.context(() => {
+            // Image: clip-path reveal from left
+            if (imageRef.current) {
+                gsap.set(imageRef.current, {
+                    clipPath: 'inset(0 100% 0 0)',
+                    willChange: 'clip-path',
+                });
+                gsap.to(imageRef.current, {
+                    clipPath: 'inset(0 0% 0 0)',
+                    duration: 1.25,
+                    ease: 'power3.inOut',
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none',
+                    },
+                    onComplete: () => {
+                        gsap.set(imageRef.current, { willChange: 'auto' });
+                    },
+                });
+                // Subtle camera parallax
+                const img = imageRef.current.querySelector('img');
+                if (img) {
+                    gsap.to(img, {
+                        yPercent: -12,
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: sectionRef.current,
+                            start: 'top bottom',
+                            end: 'bottom top',
+                            scrub: 1.2,
+                        },
+                    });
+                }
+            }
+            // Text elements stagger
+            if (textRef.current) {
+                const els = textRef.current.querySelectorAll('[data-reveal]');
+                gsap.set(els, { opacity: 0, y: 28, willChange: 'transform, opacity' });
+                gsap.to(els, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: textRef.current,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none',
+                    },
+                    onComplete: () => {
+                        gsap.set(els, { willChange: 'auto' });
+                    },
+                });
+            }
+        }, sectionRef);
+        return () => ctx.revert();
+    }, []);
+    return (<section ref={sectionRef} id="chuyen-tiem-moc" className="w-full bg-ivory py-20 md:py-28 overflow-hidden" aria-label="Chuyện tiệm mộc Sáu Thành">
       <div className="max-w-container mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           {/* Left Column: Authentic Photography (Âm tường, không gờ khung thô) */}
           <div className="lg:col-span-6 space-y-3">
-            <div
-              ref={imageRef}
-              className="relative aspect-[4/3] overflow-hidden bg-sand/20 rounded-xs shadow-[0_20px_45px_-15px_rgba(100,70,50,0.15)]"
-              style={{ clipPath: 'inset(0 0% 0 0)' }}
-            >
-              <img
-                src="/images/woodcraft/3b31d7028ecc0e9257dd5.jpg"
-                alt="Đường phố Cộng Hòa Tân Bình trong ánh nắng chiều gần tiệm Đồ Gỗ Sáu Thành"
-                className="w-full h-full object-cover object-center"
-                loading="lazy"
-                decoding="async"
-              />
+            <div ref={imageRef} className="relative aspect-[4/3] overflow-hidden bg-sand/20 rounded-xs shadow-[0_20px_45px_-15px_rgba(100,70,50,0.15)]" style={{ clipPath: 'inset(0 0% 0 0)' }}>
+              <img src="/images/woodcraft/3b31d7028ecc0e9257dd5.jpg" alt="Đường phố Cộng Hòa Tân Bình trong ánh nắng chiều gần tiệm Đồ Gỗ Sáu Thành" className="w-full h-full object-cover object-center" loading="lazy" decoding="async"/>
             </div>
             <div className="flex items-center justify-between text-xs text-walnut/70 px-1 pt-1">
               <span className="font-serif italic text-charcoal">Gắn bó cùng bà con lối xóm Tân Bình, Sài Gòn</span>
@@ -157,7 +134,7 @@ export const AtelierHeritage: React.FC = () => {
             {/* Khung ghé tiệm: Tinh giản, âm tường thanh thoát */}
             <div data-reveal className="pt-6 border-t border-walnut/10 space-y-3.5 text-xs sm:text-sm text-charcoal">
               <div className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-oak shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-oak shrink-0 mt-0.5"/>
                 <div>
                   <strong className="font-medium text-charcoal">Địa chỉ tiệm:</strong>
                   <span className="text-walnut/90 block mt-0.5">36 Cộng Hòa, Phường 4, Quận Tân Bình, TP. Hồ Chí Minh</span>
@@ -165,7 +142,7 @@ export const AtelierHeritage: React.FC = () => {
               </div>
 
               <div className="flex items-start gap-3">
-                <Clock className="w-4 h-4 text-oak shrink-0 mt-0.5" />
+                <Clock className="w-4 h-4 text-oak shrink-0 mt-0.5"/>
                 <div>
                   <strong className="font-medium text-charcoal">Đón tiếp bà con:</strong>
                   <span className="text-walnut/90 block mt-0.5">Cửa hàng mở cửa cả tuần. Cứ ghé xem gỗ, sờ tận tay thử mặt bàn ghế thoải mái trước khi mua.</span>
@@ -175,6 +152,5 @@ export const AtelierHeritage: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
 };

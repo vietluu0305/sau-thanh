@@ -15,7 +15,7 @@ Official showcase website for **Đồ Gỗ Sáu Thành** — a family-owned trad
 
 ## Tech Stack
 
-- **Framework:** React 18, TypeScript
+- **Framework:** React 18, JavaScript (ES6+)
 - **Styling:** Tailwind CSS
 - **Animation:** GSAP (ScrollTrigger)
 - **Build Tool:** Vite

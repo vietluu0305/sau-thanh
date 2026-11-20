@@ -1,13 +1,10 @@
 import React from 'react';
 import { MapPin, Phone, Clock, ArrowUp } from 'lucide-react';
-
-export const Footer: React.FC = () => {
-  const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  return (
-    <footer className="w-full bg-charcoal text-ivory pt-16 pb-12 border-t border-walnut/30" role="contentinfo">
+export const Footer = () => {
+    const handleScrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    return (<footer className="w-full bg-charcoal text-ivory pt-16 pb-12 border-t border-walnut/30" role="contentinfo">
       <div className="max-w-container mx-auto px-4 sm:px-8 space-y-12">
         {/* Main Footer Info */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start pb-10 border-b border-white/10">
@@ -33,11 +30,11 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-sand/80">
               <li className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-oak shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-oak shrink-0 mt-0.5"/>
                 <span>36 Cộng Hòa, Phường 4, Quận Tân Bình, TP. Hồ Chí Minh</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <Phone className="w-4 h-4 text-oak shrink-0 mt-0.5" />
+                <Phone className="w-4 h-4 text-oak shrink-0 mt-0.5"/>
                 <div>
                   <span className="font-mono text-ivory font-bold block">
                     0989.598.434 (A. Du) · 038.722.8744 (C. Thanh)
@@ -46,7 +43,7 @@ export const Footer: React.FC = () => {
                 </div>
               </li>
               <li className="flex items-start gap-2.5">
-                <Clock className="w-4 h-4 text-oak shrink-0 mt-0.5" />
+                <Clock className="w-4 h-4 text-oak shrink-0 mt-0.5"/>
                 <span>Mở cửa từ 8:00 đến 20:30 tất cả các ngày trong tuần</span>
               </li>
             </ul>
@@ -82,14 +79,9 @@ export const Footer: React.FC = () => {
               </ul>
             </div>
 
-            <button
-              type="button"
-              onClick={handleScrollToTop}
-              className="inline-flex items-center gap-1.5 text-xs font-mono text-sand/80 hover:text-white transition-colors pt-4 md:pt-0"
-              aria-label="Cuộn lên đầu trang"
-            >
+            <button type="button" onClick={handleScrollToTop} className="inline-flex items-center gap-1.5 text-xs font-mono text-sand/80 hover:text-white transition-colors pt-4 md:pt-0" aria-label="Cuộn lên đầu trang">
               <span>Lên đầu trang</span>
-              <ArrowUp className="w-3.5 h-3.5" />
+              <ArrowUp className="w-3.5 h-3.5"/>
             </button>
           </div>
         </div>
@@ -100,6 +92,5 @@ export const Footer: React.FC = () => {
           <p>Nghề mộc gia truyền · Uy tín tạo nên thương hiệu</p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>);
 };
