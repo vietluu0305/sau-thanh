@@ -2,7 +2,7 @@
 
 Official showcase website for **Đồ Gỗ Sáu Thành** — a family-owned traditional woodcraft workshop in Ho Chi Minh City.
 
-**Live Demo:** [sauthanh.vercel.app](https://sauthanh.vercel.app) *(update with your Vercel link)*
+**Live Demo:** [sauthanh.vercel.app](https://sauthanh.vercel.app)
 
 ---
 
