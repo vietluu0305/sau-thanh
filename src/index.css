@@ -1,0 +1,233 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Design Tokens: Colors (Woodcraft Japanese Minimalist Palette) */
+  --color-ivory: #F4F1EA;
+  --color-sand: #D9C9AE;
+  --color-oak: #A17B55;
+  --color-walnut: #644632;
+  --color-charcoal: #282722;
+  --color-white: #FFFFFF;
+
+  /* Design Tokens: Semantic Roles */
+  --color-bg-primary: var(--color-ivory);
+  --color-bg-surface: #FFFFFF;
+  --color-bg-secondary: var(--color-sand);
+  --color-text-primary: var(--color-charcoal);
+  --color-text-secondary: var(--color-walnut);
+  --color-text-muted: #6B665C;
+  --color-border-subtle: rgba(100, 70, 50, 0.15);
+  --color-border-accent: var(--color-oak);
+
+  /* Design Tokens: Spacing Scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+  --space-4xl: 144px;
+
+  /* Design Tokens: Motion & Easing */
+  --ease-natural: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-text-primary);
+    letter-spacing: -0.015em;
+  }
+
+  /* Accessible Visible Focus Ring */
+  :focus-visible {
+    outline: 2px solid var(--color-border-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/* Hide scrollbar for clean touch horizontal overflow */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Silky Smooth Editorial Animations */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fadeOutScale {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96) translateY(6px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes backdropFadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(16px);
+  }
+}
+
+@keyframes backdropFadeOut {
+  from {
+    opacity: 1;
+    backdrop-filter: blur(16px);
+  }
+  to {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-out-scale {
+  animation: fadeOutScale 0.22s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-backdrop-in {
+  animation: backdropFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-backdrop-out {
+  animation: backdropFadeOut 0.22s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+/* ==========================================================================
+   CSS SCROLL-DRIVEN ANIMATIONS (NO LIBRARY - Baseline Modern Web Standards)
+   Guidelines: scroll-entry-exit-effects, scroll-progress-indicator
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* 1. Page Scroll Progress Indicator */
+  @supports (animation-timeline: scroll()) {
+    @keyframes grow-scroll-progress {
+      from {
+        transform: scaleX(0);
+      }
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2.5px;
+      background: linear-gradient(90deg, #967453, #D8C7AC, #967453);
+      transform-origin: 0 50%;
+      z-index: 100;
+      pointer-events: none;
+      animation: grow-scroll-progress auto linear;
+      animation-timeline: scroll();
+    }
+  }
+
+  /* 2. View-Timeline Scroll Driven Reveals (Compositor-only, Non-blocking) */
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes scroll-view-reveal {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes scroll-image-parallax {
+      from {
+        transform: scale(1.06) translateY(-2%);
+      }
+      to {
+        transform: scale(1) translateY(2%);
+      }
+    }
+
+    .scroll-driven-reveal {
+      animation: scroll-view-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+
+    /* Only apply parallax on non-overflow-hidden containers */
+    .scroll-driven-parallax {
+      animation: scroll-image-parallax linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
+
+/* Accessibility: Respect Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
