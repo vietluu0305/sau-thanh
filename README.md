@@ -6,6 +6,14 @@ Official showcase website for **Đồ Gỗ Sáu Thành** — a family-owned trad
 
 ---
 
+## About This Project
+
+Growing up around my parents' woodworking business, I always dreamed of one day building a website for them with my own hands.
+
+What started as a childhood wish has finally come to life. This project is more than just a showcase of woodcraft—it's a personal milestone and my way of bringing my family's craftsmanship to the digital world.
+
+---
+
 ## Preview
 
 ![Homepage](public/images/woodcraft/homepage.png)
